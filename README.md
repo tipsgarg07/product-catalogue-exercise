@@ -1,9 +1,7 @@
 ## How to run
 
-1. Create a React + TypeScript app (e.g. `npm create vite@latest product-catalogue -- --template react-ts`)
-2. Replace the generated App.tsx with the file above
-3. `npm install`
-4. `npm run dev`
+1. `npm install`
+2. `npm run dev`
 
 ## Assumptions
 

@@ -1,0 +1,51 @@
+[
+  {
+    "id": 1,
+    "name": "Keyboard",
+    "category": "Electronics",
+    "price": 89,
+    "rating": 4.7
+  },
+  {
+    "id": 2,
+    "name": "Coffee Mug",
+    "category": "Kitchen",
+    "price": 12,
+    "rating": 4.3
+  },
+  {
+    "id": 3,
+    "name": "Wireless Mouse",
+    "category": "Electronics",
+    "price": 35,
+    "rating": 4.1
+  },
+  {
+    "id": 4,
+    "name": "Blender",
+    "category": "Kitchen",
+    "price": 65,
+    "rating": 4.5
+  },
+  {
+    "id": 5,
+    "name": "Desk Lamp",
+    "category": "Home",
+    "price": 28,
+    "rating": 4.0
+  },
+  {
+    "id": 6,
+    "name": "Monitor Stand",
+    "category": "Electronics",
+    "price": 45,
+    "rating": 3.9
+  },
+  {
+    "id": 7,
+    "name": "Cutting Board",
+    "category": "Kitchen",
+    "price": 18,
+    "rating": 4.6
+  }
+]

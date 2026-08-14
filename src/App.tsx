@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useMemo } from "react";
+import productsData from "./products.json";
 
 // ---- Types ----
 interface Product {
@@ -12,26 +13,13 @@ interface Product {
 type SortField = "name" | "price" | "rating";
 type SortDirection = "asc" | "desc";
 
-// ---- Sample data (would normally come from an API endpoint) ----
-const SAMPLE_PRODUCTS: Product[] = [
-  { id: 1, name: "Keyboard", category: "Electronics", price: 89, rating: 4.7 },
-  { id: 2, name: "Coffee Mug", category: "Kitchen", price: 12, rating: 4.3 },
-  { id: 3, name: "Wireless Mouse", category: "Electronics", price: 35, rating: 4.1 },
-  { id: 4, name: "Blender", category: "Kitchen", price: 65, rating: 4.5 },
-  { id: 5, name: "Desk Lamp", category: "Home", price: 28, rating: 4.0 },
-  { id: 6, name: "Monitor Stand", category: "Electronics", price: 45, rating: 3.9 },
-  { id: 7, name: "Cutting Board", category: "Kitchen", price: 18, rating: 4.6 },
-];
-
-// Simulates an async API call. In a real app this would be a fetch() to
-// a backend endpoint; wrapped in a promise here so the loading/error
-// states behave the same way they would against a real network request.
+// Simulates an async API call using the JSON file
 function fetchProducts(): Promise<Product[]> {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
       // To manually verify the error state, temporarily uncomment the next line:
       // reject(new Error("Failed to load products"));
-      resolve(SAMPLE_PRODUCTS);
+      resolve(productsData as Product[]);
     }, 600);
   });
 }
@@ -57,7 +45,10 @@ export default function App() {
         if (isMounted) setProducts(data);
       })
       .catch(() => {
-        if (isMounted) setError("Something went wrong while loading products. Please try again.");
+        if (isMounted)
+          setError(
+            "Something went wrong while loading products. Please try again.",
+          );
       })
       .finally(() => {
         if (isMounted) setLoading(false);
@@ -132,7 +123,11 @@ export default function App() {
           style={styles.input}
         />
 
-        <select value={category} onChange={(e) => setCategory(e.target.value)} style={styles.select}>
+        <select
+          value={category}
+          onChange={(e) => setCategory(e.target.value)}
+          style={styles.select}
+        >
           {categories.map((c) => (
             <option key={c} value={c}>
               {c}
@@ -142,15 +137,26 @@ export default function App() {
 
         <div style={styles.sortButtons}>
           {(["name", "price", "rating"] as SortField[]).map((field) => (
-            <button key={field} onClick={() => toggleSort(field)} style={styles.button}>
+            <button
+              key={field}
+              onClick={() => toggleSort(field)}
+              style={styles.button}
+            >
               Sort by {field}
-              {sortField === field ? (sortDirection === "asc" ? " ▲" : " ▼") : ""}
+              {sortField === field
+                ? sortDirection === "asc"
+                  ? " ▲"
+                  : " ▼"
+                : ""}
             </button>
           ))}
         </div>
       </div>
 
-      <p style={styles.count}>{visibleProducts.length} product{visibleProducts.length !== 1 ? "s" : ""}</p>
+      <p style={styles.count}>
+        {visibleProducts.length} product
+        {visibleProducts.length !== 1 ? "s" : ""}
+      </p>
 
       {visibleProducts.length === 0 ? (
         <p>No products match your search/filter.</p>
@@ -180,10 +186,13 @@ export default function App() {
   );
 }
 
-// Kept inline for a single-file exercise; in a real project these would
-// live in a stylesheet or CSS-in-JS solution.
 const styles: { [key: string]: React.CSSProperties } = {
-  container: { fontFamily: "sans-serif", maxWidth: 700, margin: "0 auto", padding: 20 },
+  container: {
+    fontFamily: "sans-serif",
+    maxWidth: 700,
+    margin: "0 auto",
+    padding: 20,
+  },
   centered: { textAlign: "center", marginTop: 60, fontFamily: "sans-serif" },
   controls: { display: "flex", gap: 10, flexWrap: "wrap", marginBottom: 12 },
   input: { padding: 8, flex: 1, minWidth: 160 },
